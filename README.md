@@ -2,11 +2,11 @@ Set env variable to connect to PG DB
 
 Powershell
 
-$env:PG_CONNSTRING="postgres://postgres:postgres@192.168.0.253:5432/database1"
+$env:PG_CONNSTRING="postgres://username:password@IP:5432/database1"
 
 Linux
 
-export PG_CONNSTRING="postgres://postgres:postgres@192.168.0.253:5432/database1"
+export PG_CONNSTRING="postgres://username:password@IP:5432/database1"
 
 Run app
 
