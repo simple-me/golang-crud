@@ -21,7 +21,7 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
-     - run:
+      - run:
           name: "Running arbitrary code"
           command: "echo goooooodbyeeee!!!"
 
