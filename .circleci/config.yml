@@ -30,6 +30,7 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
+      - say-goodbye
       - say-hello:
           requires:
             - say-goodbye
