@@ -3,10 +3,12 @@ package user
 import (
 	"CRUD-Operation/db/conn"
 	product "CRUD-Operation/models/products"
+	"errors"
 	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 type ProductParams struct {
@@ -51,28 +53,26 @@ func ListProducts(c *gin.Context) {
 
 func UpdateProduct(c *gin.Context) {
 	var req ProductParams
+
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
-	//prod := product.Product{}
+
+	prod := product.Product{}
 	db := conn.GetPostgres()
-	//product_to_update := db.Find(&req, "code=?", req.Code)
-	/* if product_to_update.Error != nil {
-		c.JSON(http.StatusNotFound, product_to_update.Error.Error())
-	} */
-	db.Where("code=?", req.Code).First("products")
-	//query_name := c.Request.URL.Query()
-	//db.Where("code=?", query_name["code"]).First(&prod)
-	//db.Where("code=?", query_name["code"]).First(&prod)
-	//price, err := strconv.ParseUint((query_name["price"][0]), 10, 64)
-	//db.Model(&prod).Update("Price", price)
-	/* db.Model(&req).Update("Price", req.Price)
-	db.Model(&req).Update("Code", req.Code)
-	db.Model(&req).Update("Name", req.Name) */
-	db.Model(&product.Product{}).Update("Price", req.Price)
-	//fmt.Println(err)
-	fmt.Println(db.Error)
+	err := db.First(&prod, "code=?", req.Code).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	prod.Price = uint64(req.Price)
+	prod.Code = req.Code
+	prod.Name = req.Name
+
+	db.Save(&prod)
+	c.JSON(http.StatusOK, "records changed")
 }
 
 func DeleteProduct(c *gin.Context) {

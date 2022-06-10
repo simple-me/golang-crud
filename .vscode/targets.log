@@ -8,12 +8,10 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jun 10 10:13:57 2022
+# Make data base, printed on Fri Jun 10 14:26:29 2022
 
 # Variables
 
-# environment
-FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
 SYSTEMDRIVE = C:
 # environment
@@ -25,7 +23,7 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ITNM\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-5caf4ba8-b3f3-462f-9e0b-23d2a8e8304f-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-33e4cf45-b738-451c-be2e-8066e0561f2d-sock
 # environment
 VSCODE_CWD = C:\Users\ITNM\Documents\git-repos\golang-crud
 # environment
@@ -43,9 +41,7 @@ GOPATH = C:\Users\ITNM\go
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6784_PPMPPXXZIALQKTLG
-# environment
-FPS_BROWSER_USER_PROFILE_STRING = Default
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6820_XVXADNVMTPGIBPFI
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -59,7 +55,7 @@ VSCODE_LOG_STACK = false
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = C:\Users\ITNM\AppData\Roaming\Code\CachedData\c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+VSCODE_CODE_CACHE_PATH = C:\Users\ITNM\AppData\Roaming\Code\CachedData\4af164ea3a06f701fe3e89a2bcbb421d2026b68f
 # environment
 LANG = C
 # default
@@ -99,14 +95,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 6784
+VSCODE_PID = 6820
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
 *F = $(notdir $*)
 # automatic
-<D = $(patsubst %/,%,$( 
-patsubst %\,%,$(dir $<)))
+<D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
 # environment
 VSCODE_NLS_CONFIG = {"locale":"es-419","availableLanguages":{},"_languagePackSupport":true}
 # default
@@ -196,7 +191,7 @@ ELECTRON_RUN_AS_NODE = 1
 # environment
 TEMP = C:\Users\ITNM\AppData\Local\Temp
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\bcaa0c85a4f09c4be10df4c673c2f5af-1.67.2-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\bcaa0c85a4f09c4be10df4c673c2f5af-1.68.0-main-sock
 # environment
 GOPROXY = https://proxy.golang.org,direct
 # default
@@ -205,7 +200,8 @@ GOPROXY = https://proxy.golang.org,direct
 <F = $(notdir $<)
 # default
 SUFFIXES := 
-# environment
+# environm 
+ent
 ALLUSERSPROFILE = C:\ProgramData
 # environment
 SESSIONNAME = Console
@@ -220,7 +216,7 @@ PROCESSOR_REVISION = 8e0a
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 # variable set hash-table stats:
-# Load=103/1024=10%, Rehash=0, Collisions=9/130=7%
+# Load=101/1024=10%, Rehash=0, Collisions=8/128=6%
 
 # Pattern-specific Variable Values
 
@@ -301,6 +297,6 @@ createdb:
 # strcache performance: lookups = 37 / hit rate = 29%
 # hash-table stats:
 # Load=26/8192=0%, Rehash=0, Collisions=0/37=0%
-# Finished Make data base on Fri Jun 10 10:13:57 2022
+# Finished Make data base on Fri Jun 10 14:26:29 2022
 
  
