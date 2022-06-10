@@ -1,0 +1,4 @@
+make: Entering directory 'c:/Users/ITNM/Documents/git-repos/golang-crud'
+docker exec -it postgres createdb --username=root --owner=root products
+make: Leaving directory 'c:/Users/ITNM/Documents/git-repos/golang-crud'
+ 

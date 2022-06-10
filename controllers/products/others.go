@@ -5,44 +5,28 @@ import (
 	product "CRUD-Operation/models/products"
 	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
-func HelloIndex(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.html", nil)
-}
-
-type CreateAccountParams struct {
+type ProductParams struct {
 	Name  string `json:"name"`
 	Code  string `json:"code"`
 	Price int64  `json:"price"`
 }
 
 func CreateProduct(c *gin.Context) {
-	var req CreateAccountParams
+	var req ProductParams
 	fmt.Println(c.Request.Body)
-	/* arg := CreateAccountParams{
-		Name:  req.Name,
-		Code:  req.Code,
-		Price: req.Price,
-	} */
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
 	db := conn.GetPostgres()
-	//db.AutoMigrate(&product.Product{})
-	//query_name := c.Request.URL.Query()
-	//fmt.Println(c.Request.URL.Query())
-	/* price, err := strconv.ParseUint((query_name["price"][0]), 10, 64)
-	if err != nil {
-		fmt.Println("error in price value")
-	} */
-	//create := db.Create(&product.Product{Name: query_name["name"][0], Code: query_name["code"][0], Price: price})
 	create := db.Create(&product.Product{Name: req.Name, Code: req.Code, Price: uint64(req.Price)})
-	fmt.Println(create.Error)
+	if create.Error != nil {
+		c.JSON(http.StatusBadRequest, create.Error.Error())
+	}
 }
 
 func FindProduct(c *gin.Context) {
@@ -66,13 +50,29 @@ func ListProducts(c *gin.Context) {
 }
 
 func UpdateProduct(c *gin.Context) {
-	prod := product.Product{}
+	var req ProductParams
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+	//prod := product.Product{}
 	db := conn.GetPostgres()
-	query_name := c.Request.URL.Query()
-	db.Where("code=?", query_name["code"]).First(&prod)
-	price, err := strconv.ParseUint((query_name["price"][0]), 10, 64)
-	db.Model(&prod).Update("Price", price)
-	fmt.Println(err)
+	//product_to_update := db.Find(&req, "code=?", req.Code)
+	/* if product_to_update.Error != nil {
+		c.JSON(http.StatusNotFound, product_to_update.Error.Error())
+	} */
+	db.Where("code=?", req.Code).First("products")
+	//query_name := c.Request.URL.Query()
+	//db.Where("code=?", query_name["code"]).First(&prod)
+	//db.Where("code=?", query_name["code"]).First(&prod)
+	//price, err := strconv.ParseUint((query_name["price"][0]), 10, 64)
+	//db.Model(&prod).Update("Price", price)
+	/* db.Model(&req).Update("Price", req.Price)
+	db.Model(&req).Update("Code", req.Code)
+	db.Model(&req).Update("Name", req.Name) */
+	db.Model(&product.Product{}).Update("Price", req.Price)
+	//fmt.Println(err)
+	fmt.Println(db.Error)
 }
 
 func DeleteProduct(c *gin.Context) {
