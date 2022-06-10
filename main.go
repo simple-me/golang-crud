@@ -1,8 +1,9 @@
 package main
-import(
-     routes "CRUD-Operation/routes"
+
+import (
+	routes "CRUD-Operation/routes"
 )
+
 func main() {
-     //routes.StartService()
-     routes.StartGin()
+	routes.StartGin()
 }
