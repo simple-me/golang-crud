@@ -76,9 +76,29 @@ func UpdateProduct(c *gin.Context) {
 }
 
 func DeleteProduct(c *gin.Context) {
+	var req ProductParams
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
 	prod := product.Product{}
 	db := conn.GetPostgres()
-	query_name := c.Request.URL.Query()
-	db.Where("code=?", query_name["code"]).Delete(&prod)
-	db.Unscoped().Where("code=?", query_name["code"]).Delete(&prod)
+	err := db.First(&prod, "code=?", req.Code).Error
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		c.JSON(http.StatusNotFound, err.Error())
+		return
+	}
+
+	err = db.Delete(&prod).Error
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
 }
