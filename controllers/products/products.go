@@ -19,7 +19,7 @@ type ProductParams struct {
 
 func CreateProduct(c *gin.Context) {
 	var req ProductParams
-	fmt.Println(c.Request.Body)
+	//fmt.Println(c.Request.Body)
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
