@@ -1,3 +1,5 @@
+Simple golang crud that creates, lists, deletes and updates a list of products
+
 Set env variable to connect to PG DB
 
 Powershell
