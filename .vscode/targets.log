@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jun 11 12:03:01 2022
+# Make data base, printed on Mon Jun 13 14:01:02 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ITNM\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-be5951ad-ff85-4f0a-b012-c27580d70ebf-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-8e7b55eb-f3ed-419c-acaf-6a561f56c94f-sock
 # environment
 VSCODE_CWD = C:\Users\ITNM\Documents\git-repos\golang-crud
 # environment
@@ -43,7 +43,7 @@ GOPATH = C:\Users\ITNM\go
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12292_VNVTKZAQNATMBAPZ
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_9088_VEAZHOXUXOYNTYSV
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -79,7 +79,7 @@ CURDIR := c:/Users/ITNM/Documents/git-repos/golang-crud
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # automatic
 *D = $(patsubst %/,%,$(patsubst %\,%,$(dir $*)))
 # environment
@@ -99,7 +99,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 12292
+VSCODE_PID = 9088
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -129,7 +129,7 @@ MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\HashiCorp\Vagrant\bin;C:\Users\ITNM\Documents\terraform-bins\terraform_1.0.6_windows_amd64\;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files\Git\cmd;C:\Users\ITNM\Documents\kubectl-bins\kubectl-1.22\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Go\bin;C:\Users\ITNM\scoop\shims;C:\Users\ITNM\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\ITNM\AppData\Local\Programs\Python\Python310\;C:\Users\ITNM\AppData\Local\Microsoft\WindowsApps;C:\Program Files\MPC-BE x64\;C:\Users\ITNM\AppData\Local\Android\Sdk\platform-tools;C:\Users\ITNM\go\bin;C:\Users\ITNM\AppData\Local\Yarn\bin;C:\Users\ITNM\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ITNM\go\bin;C:\Users\ITNM\Documents\protobuffer-bin;
+PATH = C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\HashiCorp\Vagrant\bin;C:\Users\ITNM\Documents\terraform-bins\terraform_1.0.6_windows_amd64\;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files\Git\cmd;C:\Users\ITNM\Documents\kubectl-bins\kubectl-1.22\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Go\bin;C:\Program Files\nodejs\;C:\Users\ITNM\scoop\shims;C:\Users\ITNM\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\ITNM\AppData\Local\Programs\Python\Python310\;C:\Users\ITNM\AppData\Local\Microsoft\WindowsApps;C:\Program Files\MPC-BE x64\;C:\Users\ITNM\AppData\Local\Android\Sdk\platform-tools;C:\Users\ITNM\go\bin;C:\Users\ITNM\AppData\Local\Yarn\bin;C:\Users\ITNM\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ITNM\go\bin;C:\Users\ITNM\Documents\protobuffer-bin;C:\Users\ITNM\AppData\Roaming\npm
 # environment
 ZES_ENABLE_SYSMAN = 1
 # environment
@@ -154,7 +154,8 @@ COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
 ?F = $(notdir $?)
 # environment
 PROGRAMW6432 = C:\Program Files
-# environment
+# 
+ environment
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
 # automatic
 +F = $(notdir $+)
@@ -197,8 +198,7 @@ TEMP = C:\Users\ITNM\AppData\Local\Temp
 # environment
 VSCODE_IPC_HOOK = \\.\pipe\bcaa0c85a4f09c4be10df4c673c2f5af-1.68.0-main-sock
 # environment
-GOPROXY =  
-https://proxy.golang.org,direct
+GOPROXY = https://proxy.golang.org,direct
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -288,7 +288,8 @@ createdb:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=8/1024=1%, Rehash=0, Collisions=0/21=0%
+# Load=8/1024=1%, Rehash=0, 
+ Collisions=0/21=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -301,6 +302,6 @@ createdb:
 # strcache performance: lookups = 37 / hit rate = 29%
 # hash-table stats:
 # Load=26/8192=0%, Rehash=0, Collisions=0/37=0%
-# Finished Make data base on Sat Jun 11 12:03:01 2022
+# Finished Make data base on Mon Jun 13 14:01:02 2022
 
  

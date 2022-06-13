@@ -83,3 +83,52 @@ func TestFindProduct(t *testing.T) {
 	fmt.Println(r.Response.Code)
 	require.Equal(t, r.Response.Code, prod.Code)
 }
+
+func TestDeleteProduct(t *testing.T) {
+	router := routes.StartGin()
+	w := httptest.NewRecorder()
+
+	//Create random product
+	var buf bytes.Buffer
+	prod := utils.RandomProductParams()
+	err := json.NewEncoder(&buf).Encode(prod)
+	if err != nil {
+		log.Fatal(err)
+	}
+	req, err := http.NewRequest("POST", "/api/product/create-product", &buf)
+	require.NoError(t, err)
+	router.ServeHTTP(w, req)
+
+	//Delete recently created product
+	req, err = http.NewRequest("POST", "/api/product/delete-product", &buf)
+	require.NoError(t, err)
+	router.ServeHTTP(w, req)
+	require.Equal(t, 200, w.Code)
+}
+
+func TestUpdateProduct(t *testing.T) {
+	router := routes.StartGin()
+	w := httptest.NewRecorder()
+
+	//Create random product
+	var buf bytes.Buffer
+	prod := utils.RandomProductParams()
+	err := json.NewEncoder(&buf).Encode(prod)
+	if err != nil {
+		log.Fatal(err)
+	}
+	req, err := http.NewRequest("POST", "/api/product/create-product", &buf)
+	require.NoError(t, err)
+	router.ServeHTTP(w, req)
+
+	//Update recently created product
+	prod.Name = utils.RandomString(8)
+	prod.Price = utils.RandomInt()
+	err = json.NewEncoder(&buf).Encode(prod)
+	if err != nil {
+		log.Fatal(err)
+	}
+	req, err = http.NewRequest("POST", "/api/product/update-product", &buf)
+	require.NoError(t, err)
+	router.ServeHTTP(w, req)
+}

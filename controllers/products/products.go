@@ -103,4 +103,5 @@ func DeleteProduct(c *gin.Context) {
 		return
 	}
 
+	c.JSON(http.StatusOK, "record deleted")
 }

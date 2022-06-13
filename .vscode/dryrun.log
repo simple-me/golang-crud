@@ -1,7 +1,5 @@
 make.exe --dry-run --always-make --keep-going --print-directory
 make: Entering directory 'c:/Users/ITNM/Documents/git-repos/golang-crud'
- 
 docker exec -it postgres createdb --username=root --owner=root products
- 
 make: Leaving directory 'c:/Users/ITNM/Documents/git-repos/golang-crud'
  
