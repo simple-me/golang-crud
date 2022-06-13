@@ -35,10 +35,12 @@ func FindProduct(c *gin.Context) {
 	fmt.Println(c.Param("code"))
 	prod := product.Product{}
 	db := conn.GetPostgres()
-	res := db.First(&prod, "code=?", c.Param("code"))
-	if res.Error == nil {
-		c.JSON(http.StatusOK, gin.H{"response": prod})
+	err := db.First(&prod, "code=?", c.Param("code")).Error
+	if err != nil {
+		c.JSON(http.StatusNotFound, "product was not found")
+		return
 	}
+	c.JSON(http.StatusOK, gin.H{"response": prod})
 }
 
 func ListProducts(c *gin.Context) {

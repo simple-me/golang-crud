@@ -5,5 +5,6 @@ import (
 )
 
 func main() {
-	routes.StartGin()
+	r := routes.StartGin()
+	r.Run(":8000")
 }
