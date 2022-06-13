@@ -6,4 +6,5 @@ import (
 
 func main() {
 	routes.StartGin()
+	fmt.Println("hello")
 }
