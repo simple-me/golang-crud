@@ -10,6 +10,7 @@ import (
 	"log"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -43,6 +44,7 @@ func TestCreateProduct(t *testing.T) {
 	router := routes.StartGin()
 	w := httptest.NewRecorder()
 
+	//Create random product - valid values
 	var buf bytes.Buffer
 	prod := utils.RandomProductParams()
 	err := json.NewEncoder(&buf).Encode(prod)
@@ -53,6 +55,7 @@ func TestCreateProduct(t *testing.T) {
 	router.ServeHTTP(w, req)
 
 	require.Equal(t, 200, w.Code)
+
 }
 
 func TestFindProduct(t *testing.T) {
@@ -70,7 +73,7 @@ func TestFindProduct(t *testing.T) {
 	require.NoError(t, err)
 	router.ServeHTTP(w, req)
 
-	//Find that same recently created random product
+	//Find that same recently created random product -- product found
 	req, err = http.NewRequest("GET", fmt.Sprintf("/api/product/find-product/%s", prod.Code), nil)
 	require.NoError(t, err)
 	router.ServeHTTP(w, req)
@@ -81,7 +84,17 @@ func TestFindProduct(t *testing.T) {
 	var r ProductParams
 	json.Unmarshal(data, &r)
 	fmt.Println(r.Response.Code)
-	require.Equal(t, r.Response.Code, prod.Code)
+	require.Equal(t, prod.Code, r.Response.Code)
+
+	//Find that same recently created random product -- product not found
+	req, err = http.NewRequest("GET", "/api/product/find-product/blah", nil)
+	router.ServeHTTP(w, req)
+
+	require.NoError(t, err)
+	msg, err := strconv.Unquote(w.Body.String())
+	require.NoError(t, err)
+	require.Equal(t, "record not found", msg)
+
 }
 
 func TestDeleteProduct(t *testing.T) {
