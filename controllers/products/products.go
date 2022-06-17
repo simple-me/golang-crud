@@ -37,7 +37,8 @@ func FindProduct(c *gin.Context) {
 	db := conn.GetPostgres()
 	err := db.First(&prod, "code=?", c.Param("code")).Error
 	if err != nil {
-		c.JSON(http.StatusNotFound, "product was not found")
+		//c.JSON(http.StatusNotFound, "product was not found")
+		c.JSON(http.StatusNotFound, err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"response": prod})
