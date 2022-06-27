@@ -1,7 +1,7 @@
 package user
 
 import (
-	"CRUD-Operation/db/conn"
+	model "CRUD-Operation/models/products"
 	product "CRUD-Operation/models/products"
 	"errors"
 	"fmt"
@@ -19,25 +19,21 @@ type ProductParams struct {
 
 func CreateProduct(c *gin.Context) {
 	var req ProductParams
-	//fmt.Println(c.Request.Body)
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
-	db := conn.GetPostgres()
-	create := db.Create(&product.Product{Name: req.Name, Code: req.Code, Price: uint64(req.Price)})
-	if create.Error != nil {
-		c.JSON(http.StatusBadRequest, create.Error.Error())
+	err := model.Create(product.Product{Name: req.Name, Code: req.Code, Price: uint64(req.Price)})
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
 	}
 }
 
 func FindProduct(c *gin.Context) {
 	fmt.Println(c.Param("code"))
-	prod := product.Product{}
-	db := conn.GetPostgres()
-	err := db.First(&prod, "code=?", c.Param("code")).Error
+	prod, err := model.Get(c.Param("code"))
 	if err != nil {
-		//c.JSON(http.StatusNotFound, "product was not found")
 		c.JSON(http.StatusNotFound, err.Error())
 		return
 	}
@@ -45,13 +41,13 @@ func FindProduct(c *gin.Context) {
 }
 
 func ListProducts(c *gin.Context) {
-	var prod []product.Product
-	db := conn.GetPostgres()
-	res := db.Find(&prod)
-	fmt.Println(res.RowsAffected)
-	if res.Error == nil {
-		c.JSON(http.StatusOK, gin.H{"response": prod})
+	prod, err := model.GetAll()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
 	}
+
+	c.JSON(http.StatusOK, gin.H{"response": prod})
 }
 
 func UpdateProduct(c *gin.Context) {
@@ -62,20 +58,11 @@ func UpdateProduct(c *gin.Context) {
 		return
 	}
 
-	prod := product.Product{}
-	db := conn.GetPostgres()
-	err := db.First(&prod, "code=?", req.Code).Error
-	if errors.Is(err, gorm.ErrRecordNotFound) {
+	err := model.Update(product.Product{Name: req.Name, Code: req.Code, Price: uint64(req.Price)})
+	if err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
-
-	prod.Price = uint64(req.Price)
-	prod.Code = req.Code
-	prod.Name = req.Name
-
-	db.Save(&prod)
-	c.JSON(http.StatusOK, "records changed")
 }
 
 func DeleteProduct(c *gin.Context) {
@@ -86,21 +73,14 @@ func DeleteProduct(c *gin.Context) {
 		return
 	}
 
-	prod := product.Product{}
-	db := conn.GetPostgres()
-	err := db.First(&prod, "code=?", req.Code).Error
+	err := model.Delete(req.Code)
+
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		c.JSON(http.StatusNotFound, err.Error())
-		return
-	}
-
-	err = db.Delete(&prod).Error
-	if err != nil {
-		c.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
 
