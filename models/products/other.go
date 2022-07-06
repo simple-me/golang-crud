@@ -1,9 +1,8 @@
 package model
 
 type Product struct {
-	//gorm.Model `json:"-"`
-	ID    uint   `gorm:"primarykey"`
-	Name  string `gorm:"unique";not null`
-	Code  string `gorm:"unique";not null`
-	Price uint64
+	ID    uint   `json:"id"`
+	Name  string `json:"name"`
+	Code  string `json:"code"`
+	Price uint64 `json:"price"`
 }

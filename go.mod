@@ -1,4 +1,5 @@
-module CRUD-Operation
+//module CRUD-Operation
+module github.com/simple-me/golang-crud
 
 go 1.17
 

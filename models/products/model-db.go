@@ -1,7 +1,7 @@
 package model
 
 import (
-	"CRUD-Operation/db/conn"
+	"github.com/simple-me/golang-crud/db/conn"
 )
 
 func Get(code string) (*Product, error) {

@@ -1,10 +1,20 @@
 package main
 
 import (
-	routes "CRUD-Operation/routes"
+	"net/http"
+	"time"
+
+	routes "github.com/simple-me/golang-crud/routes"
 )
 
 func main() {
 	r := routes.StartGin()
-	r.Run(":8000")
+	server := http.Server{
+		Addr:           ":8000",
+		Handler:        r,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: http.DefaultMaxHeaderBytes,
+	}
+	server.ListenAndServe()
 }

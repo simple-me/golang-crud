@@ -8,17 +8,24 @@ import (
 type ProductParams struct {
 	Name  string
 	Code  string
-	Price int64
+	Price interface{}
 }
 
-func RandomString(n int) string {
-	var letters = []rune("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+func RandomString(str string) string {
 
-	s := make([]rune, n)
-	for i := range s {
-		s[i] = letters[rand.Intn(len(letters))]
-	}
-	return string(s)
+	rand.Seed(time.Now().Unix())
+
+	//str := "thisisarandomstring123"
+
+	shuff := []rune(str)
+
+	// Shuffling the string
+	rand.Shuffle(len(shuff), func(i, j int) {
+		shuff[i], shuff[j] = shuff[j], shuff[i]
+	})
+
+	// Displaying the random string
+	return string(shuff)
 }
 
 func RandomInt() int64 {
@@ -27,10 +34,10 @@ func RandomInt() int64 {
 	return int64(v)
 }
 
-func RandomProductParams() ProductParams {
+func RandomProductParams(s string) ProductParams {
 	prod := ProductParams{
-		Name:  RandomString(4),
-		Code:  RandomString(9),
+		Name:  RandomString(s),
+		Code:  RandomString(s),
 		Price: RandomInt(),
 	}
 

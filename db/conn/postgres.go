@@ -1,7 +1,7 @@
 package conn
 
 import (
-	"log"
+	"fmt"
 	"os"
 
 	"gorm.io/driver/postgres"
@@ -17,7 +17,8 @@ func GetPostgres() *gorm.DB {
 	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
 
 	if err != nil {
-		log.Fatalln(err)
+		fmt.Println(err)
+		//log.Fatalln(err)
 	}
 
 	return db
