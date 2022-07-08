@@ -4,9 +4,10 @@ import (
 	"github.com/simple-me/golang-crud/db/conn"
 )
 
+var db = conn.GetPostgres()
+
 func Get(code string) (*Product, error) {
 	prod := Product{}
-	db := conn.GetPostgres()
 	err := db.First(&prod, "code=?", code).Error
 	if err != nil {
 		return nil, err
@@ -16,7 +17,6 @@ func Get(code string) (*Product, error) {
 
 func GetAll() ([]Product, error) {
 	prod := []Product{}
-	db := conn.GetPostgres()
 	err := db.Find(&prod).Error
 	if err != nil {
 		return nil, err
@@ -25,7 +25,6 @@ func GetAll() ([]Product, error) {
 }
 
 func Create(product Product) error {
-	db := conn.GetPostgres()
 	err := db.Create(&Product{Name: product.Name, Code: product.Code, Price: uint64(product.Price)}).Error
 	if err != nil {
 		return err
@@ -35,7 +34,6 @@ func Create(product Product) error {
 
 func Update(newProd Product) error {
 	prod := Product{}
-	db := conn.GetPostgres()
 	err := db.First(&prod, "code=?", newProd.Code).Error
 	if err != nil {
 		return err
@@ -51,7 +49,6 @@ func Update(newProd Product) error {
 
 func Delete(code string) error {
 	prod := Product{}
-	db := conn.GetPostgres()
 	err := db.First(&prod, "code=?", code).Error
 	if err != nil {
 		return err

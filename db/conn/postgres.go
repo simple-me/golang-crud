@@ -8,6 +8,9 @@ import (
 	"gorm.io/gorm"
 )
 
+/* var DB *gorm.DB
+var DBerr error */
+
 func GetPostgres() *gorm.DB {
 	dbURL := os.Getenv("PG_CONNSTRING")
 	if os.Getenv("PG_CONNSTRING") == "" {

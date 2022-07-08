@@ -1,15 +1,21 @@
 package routes
 
 import (
+	"log"
 	"net/http"
 
 	products "github.com/simple-me/golang-crud/controllers/products"
+	"github.com/simple-me/golang-crud/db/conn"
 
 	"github.com/gin-gonic/gin"
 )
 
 //StartGin function
 func StartGin() *gin.Engine {
+	db := conn.GetPostgres()
+	if db.Error != nil {
+		log.Fatal(db.Error)
+	}
 	router := gin.Default()
 	api := router.Group("/api")
 	{
